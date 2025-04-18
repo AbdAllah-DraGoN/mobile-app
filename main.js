@@ -4,39 +4,79 @@
 let currentLesson = 0;
 const totalLessons = 5;
 let selectedOptions = { 1: null, 2: null, 3: null, 4: null, 5: null };
+let currentSection = "content"; // تتبع القسم الحالي: 'content' (شرح) أو 'quiz' (اختبار)
 
 // دالة لإظهار صفحة معينة وإخفاء الباقي
-function showPage(pageId) {
+function showPage(pageId, section = "content") {
   document.querySelectorAll(".page").forEach((page) => {
     page.classList.remove("active");
   });
-  document.getElementById(pageId).classList.add("active");
+  const page = document.getElementById(pageId);
+  page.classList.add("active");
+
+  // إظهار/إخفاء أقسام الشرح والاختبار
+  currentSection = section;
+  const lessonNumber = pageId.includes("lesson-page-")
+    ? parseInt(pageId.split("-")[2])
+    : 0;
+  if (lessonNumber > 0) {
+    const contentSection = page.querySelector(".lesson-content");
+    const quizSection = page.querySelector(".quiz-section");
+    const lessonHeader = page.querySelector(".lesson-header");
+
+    if (section === "content") {
+      contentSection.style.display = "block";
+      lessonHeader.style.display = "flex";
+      quizSection.style.display = "none";
+    } else {
+      contentSection.style.display = "none";
+      lessonHeader.style.display = "none";
+      quizSection.style.display = "block";
+    }
+  }
 
   // تحديث حالة أزرار التنقل
   updateNavButtons();
+}
+
+// دالة لإضافة زر "الانتقال إلى الاختبار" ديناميكيًا
+function addQuizButton(lessonNumber) {
+  const contentSection = document.querySelector(
+    `#lesson-page-${lessonNumber} .lesson-content`
+  );
+  const description = contentSection.querySelector(".lesson-description");
+  let quizButton = contentSection.querySelector(".quiz-btn");
+
+  // إضافة الزر فقط إذا لم يكن موجودًا
+  if (!quizButton && description) {
+    quizButton = document.createElement("button");
+    quizButton.className = "btn btn-block quiz-btn";
+    quizButton.textContent = "الانتقال إلى الاختبار";
+    quizButton.style.marginTop = "20px"; // لإضافة مسافة بعد الوصف
+    quizButton.onclick = () => showPage(`lesson-page-${lessonNumber}`, "quiz");
+    description.insertAdjacentElement("afterend", quizButton); // وضع الزر بعد الوصف مباشرة
+  }
 }
 
 // دالة لفتح درس معين
 function openLesson(lessonNumber) {
   if (lessonNumber >= 1 && lessonNumber <= totalLessons) {
     currentLesson = lessonNumber;
-    showPage(`lesson-page-${lessonNumber}`);
+    showPage(`lesson-page-${lessonNumber}`, "content");
+    addQuizButton(lessonNumber); // إضافة الزر عند فتح الدرس
   }
 }
 
 // دالة لتحديد خيار في الاختبار
 function selectOption(optionElement, lessonNumber) {
-  // إلغاء تحديد الخيارات الأخرى في نفس الدرس
   const options = document.querySelectorAll(
     `#lesson-page-${lessonNumber} .option`
   );
   options.forEach((opt) => opt.classList.remove("selected"));
 
-  // تحديد الخيار المختار
   optionElement.classList.add("selected");
   selectedOptions[lessonNumber] = optionElement;
 
-  // إظهار زر التحقق
   document.getElementById(`check-answer-${lessonNumber}`).style.display =
     "block";
 }
@@ -54,7 +94,6 @@ function checkAnswer(lessonNumber) {
 
   const isCorrect = selectedOption.getAttribute("data-correct") === "true";
 
-  // إخفاء زر التحقق بعد النقر
   document.getElementById(`check-answer-${lessonNumber}`).style.display =
     "none";
 
@@ -63,11 +102,9 @@ function checkAnswer(lessonNumber) {
     feedbackElement.textContent = "إجابة صحيحة! أحسنت!";
     feedbackElement.className = "feedback success";
 
-    // إظهار زر "التالي" في شريط التنقل إذا لم يكن الدرس الأخير
     if (lessonNumber < totalLessons) {
       document.getElementById("next-btn").style.display = "flex";
     } else {
-      // إذا كان الدرس الأخير، إظهار صفحة الإكمال
       setTimeout(() => showPage("completion-page"), 1000);
     }
   } else {
@@ -75,7 +112,6 @@ function checkAnswer(lessonNumber) {
     feedbackElement.textContent = "إجابة خاطئة! حاول مرة أخرى.";
     feedbackElement.className = "feedback error";
 
-    // إعادة تعيين الخيار المختار للسماح بمحاولة أخرى
     selectedOptions[lessonNumber] = null;
     setTimeout(() => {
       selectedOption.classList.remove("selected", "incorrect");
@@ -114,22 +150,18 @@ function updateNavButtons() {
   const prevBtn = document.getElementById("prev-btn");
   const nextBtn = document.getElementById("next-btn");
 
-  // إخفاء زر "السابق" في الصفحة الرئيسية أو الدرس الأول
   prevBtn.style.display =
     currentLesson === 0 || currentLesson === 1 ? "none" : "flex";
 
-  // إخفاء زر "التالي" إذا لم يتم الإجابة بشكل صحيح أو في الصفحة الرئيسية
-  nextBtn.style.display =
-    currentLesson === 0 || currentLesson > totalLessons ? "none" : "flex";
-
-  // إذا تمت الإجابة بشكل صحيح، يظهر زر "التالي"
-  if (
-    currentLesson > 0 &&
+  if (currentLesson === 0 || currentLesson > totalLessons) {
+    nextBtn.style.display = "none";
+  } else if (
+    currentSection === "quiz" &&
     selectedOptions[currentLesson] &&
     selectedOptions[currentLesson].getAttribute("data-correct") === "true"
   ) {
     nextBtn.style.display = "flex";
-  } else if (currentLesson > 0) {
+  } else {
     nextBtn.style.display = "none";
   }
 }
@@ -137,5 +169,8 @@ function updateNavButtons() {
 // تهيئة التطبيق عند تحميل الصفحة
 document.addEventListener("DOMContentLoaded", () => {
   showPage("home-page");
+  // إضافة أزرار "الانتقال إلى الاختبار" لكل الدروس عند التحميل
+  for (let i = 1; i <= totalLessons; i++) {
+    addQuizButton(i);
+  }
 });
-
