@@ -1,138 +1,375 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>تعلم React</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f5f5f5;
-        direction: rtl;
-        text-align: right;
-      }
-      .container {
-        padding: 20px;
-        max-width: 100%;
-      }
-      h1 {
-        color: #61dafb;
-        font-size: 24px;
-      }
-      p {
-        color: #333333;
-        font-size: 16px;
-      }
-      button {
-        background-color: #61dafb;
-        color: #ffffff;
-        border: none;
-        padding: 10px 20px;
-        font-size: 16px;
-        margin: 10px 0;
-        cursor: pointer;
-        border-radius: 5px;
-      }
-      button:hover {
-        background-color: #4db8e3;
-      }
-      .lesson-card {
-        background-color: #ffffff;
-        padding: 15px;
-        margin: 10px 0;
-        border-radius: 5px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      }
-      .code {
-        background-color: #f0f0f0;
-        padding: 5px;
-        font-family: monospace;
-        color: #61dafb;
-      }
-      .hidden {
-        display: none;
-      }
-    </style>
+    <title>تعلم React خطوة بخطوة</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
     <div class="container">
-      <!-- الصفحة الرئيسية -->
-      <div id="main-page">
-        <h1>مرحبًا بك في تعلم React!</h1>
-        <p>
-          React هي مكتبة جافاسكريبت لبناء واجهات مستخدم تفاعلية.<br />في الكورس
-          ده، هنتعلم أساسيات React خطوة بخطوة.
-        </p>
-        <button onclick="showLessons()">ابدأ الدروس الآن</button>
+      <!-- الصفحة الرئيسية (اختيار الدروس) -->
+      <div id="home-page" class="page active">
+        <div class="home-header">
+          <div class="app-logo">⚛️</div>
+          <h1>تعلم React خطوة بخطوة</h1>
+          <p>اختر درساً للبدء في رحلة تعلم React</p>
+        </div>
+
+        <div class="lessons-list">
+          <div class="lesson-card" onclick="openLesson(1)">
+            <div class="lesson-icon">1</div>
+            <div class="lesson-info">
+              <h3>مقدمة في React</h3>
+              <p>تعرف على أساسيات React ومميزاته</p>
+            </div>
+            <div class="lesson-arrow">
+              <span>›</span>
+            </div>
+          </div>
+
+          <div class="lesson-card" onclick="openLesson(2)">
+            <div class="lesson-icon">2</div>
+            <div class="lesson-info">
+              <h3>المكونات في React</h3>
+              <p>تعلم كيفية بناء وتنظيم المكونات</p>
+            </div>
+            <div class="lesson-arrow">
+              <span>›</span>
+            </div>
+          </div>
+
+          <div class="lesson-card" onclick="openLesson(3)">
+            <div class="lesson-icon">3</div>
+            <div class="lesson-info">
+              <h3>JSX وطريقة الكتابة</h3>
+              <p>اكتشف كيفية كتابة JSX لإنشاء واجهات المستخدم</p>
+            </div>
+            <div class="lesson-arrow">
+              <span>›</span>
+            </div>
+          </div>
+
+          <div class="lesson-card" onclick="openLesson(4)">
+            <div class="lesson-icon">4</div>
+            <div class="lesson-info">
+              <h3>الحالة (State) والخصائص (Props)</h3>
+              <p>إدارة البيانات والتفاعل بين المكونات</p>
+            </div>
+            <div class="lesson-arrow">
+              <span>›</span>
+            </div>
+          </div>
+
+          <div class="lesson-card" onclick="openLesson(5)">
+            <div class="lesson-icon">5</div>
+            <div class="lesson-info">
+              <h3>دورة حياة المكون وال-Hooks</h3>
+              <p>تعرف على دورة حياة المكونات وكيفية استخدام Hooks</p>
+            </div>
+            <div class="lesson-arrow">
+              <span>›</span>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <!-- قائمة الدروس -->
-      <div id="lessons-page" class="hidden">
-        <h1>دروس تعلم React</h1>
-        <div class="lesson-card" onclick="showLesson(1)">
-          <h3>الدرس 1: مقدمة عن React</h3>
-          <p>هنتعلم إزاي نجهز بيئة العمل لـ React.</p>
+      <!-- صفحات الدروس -->
+      <div id="lesson-page-1" class="page">
+        <div class="lesson-header">
+          <div class="lesson-title">مقدمة في React</div>
+          <div class="lesson-number">الدرس 1</div>
         </div>
-        <div class="lesson-card" onclick="showLesson(2)">
-          <h3>الدرس 2: المكونات</h3>
-          <p>هنتعلم إزاي نعمل Components في React.</p>
+
+        <div class="lesson-content">
+          <p class="lesson-description">
+            React هي مكتبة JavaScript مفتوحة المصدر لبناء واجهات المستخدم. تم
+            تطويرها بواسطة فيسبوك في عام 2013، وأصبحت من أكثر المكتبات استخداماً
+            في تطوير تطبيقات الويب الحديثة.
+            <br /><br />
+            تتميز React بنهجها الفريد في بناء واجهات المستخدم باستخدام مفهوم
+            المكونات والـ Virtual DOM، مما يجعل التطبيقات أسرع وأكثر كفاءة.
+          </p>
         </div>
-        <div class="lesson-card" onclick="showLesson(3)">
-          <h3>الدرس 3: الـ State والـ Props</h3>
-          <p>هنفهم الفرق بين State وProps.</p>
+
+        <div class="quiz-section">
+          <h3 class="quiz-title">اختبر معلوماتك</h3>
+          <p class="quiz-question">ما هو React؟</p>
+          <div class="options-list">
+            <div
+              class="option"
+              data-correct="true"
+              onclick="selectOption(this, 1)"
+            >
+              مكتبة JavaScript لبناء واجهات المستخدم
+            </div>
+            <div class="option" onclick="selectOption(this, 1)">
+              لغة برمجة جديدة
+            </div>
+            <div class="option" onclick="selectOption(this, 1)">
+              إطار عمل كامل لتطوير الويب
+            </div>
+          </div>
+          <div class="feedback" id="feedback-1"></div>
+          <div style="margin-top: 20px">
+            <button
+              id="check-answer-1"
+              class="btn btn-block"
+              onclick="checkAnswer(1)"
+            >
+              تحقق من إجابتك
+            </button>
+          </div>
         </div>
-        <button onclick="showMain()">رجوع</button>
       </div>
 
-      <!-- صفحة الدرس -->
-      <div id="lesson-page" class="hidden">
-        <h1 id="lesson-title"></h1>
-        <p id="lesson-content"></p>
-        <button onclick="showLessons()">رجوع</button>
+      <div id="lesson-page-2" class="page">
+        <div class="lesson-header">
+          <div class="lesson-title">المكونات في React</div>
+          <div class="lesson-number">الدرس 2</div>
+        </div>
+
+        <div class="lesson-content">
+          <p class="lesson-description">
+            المكونات (Components) هي وحدات البناء الأساسية في React. كل مكون له
+            مسؤولية محددة ويمكن إعادة استخدامه في أجزاء مختلفة من التطبيق.
+            <br /><br />
+            يمكن تقسيم المكونات في React إلى نوعين أساسيين: المكونات الوظيفية
+            (Functional Components) والمكونات الصنفية (Class Components). في
+            التطبيقات الحديثة، أصبحت المكونات الوظيفية هي الخيار المفضل بسبب
+            بساطتها وقوتها مع استخدام Hooks.
+          </p>
+        </div>
+
+        <div class="quiz-section">
+          <h3 class="quiz-title">اختبر معلوماتك</h3>
+          <p class="quiz-question">ما الذي يميز المكونات في React؟</p>
+          <div class="options-list">
+            <div class="option" onclick="selectOption(this, 2)">
+              تعمل فقط مع قواعد البيانات
+            </div>
+            <div
+              class="option"
+              data-correct="true"
+              onclick="selectOption(this, 2)"
+            >
+              قابلة لإعادة الاستخدام ولها مسؤولية محددة
+            </div>
+            <div class="option" onclick="selectOption(this, 2)">
+              لا يمكن تخصيصها بعد إنشائها
+            </div>
+          </div>
+          <div class="feedback" id="feedback-2"></div>
+          <div style="margin-top: 20px">
+            <button
+              id="check-answer-2"
+              class="btn btn-block"
+              onclick="checkAnswer(2)"
+            >
+              تحقق من إجابتك
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="lesson-page-3" class="page">
+        <div class="lesson-header">
+          <div class="lesson-title">JSX وطريقة الكتابة</div>
+          <div class="lesson-number">الدرس 3</div>
+        </div>
+
+        <div class="lesson-content">
+          <p class="lesson-description">
+            JSX (JavaScript XML) هو امتداد لبناء الجملة في JavaScript يشبه HTML.
+            يسمح لك بكتابة عناصر HTML مباشرة داخل ملفات JavaScript، مما يجعل
+            كتابة واجهات المستخدم أكثر سهولة وبديهية.
+            <br /><br />
+            باستخدام JSX، يمكنك دمج عناصر HTML مع منطق JavaScript في نفس الملف.
+            يتم تحويل JSX إلى JavaScript قياسي بواسطة مترجمات مثل Babel قبل
+            تشغيل التطبيق في المتصفح.
+          </p>
+        </div>
+
+        <div class="quiz-section">
+          <h3 class="quiz-title">اختبر معلوماتك</h3>
+          <p class="quiz-question">ما هو JSX؟</p>
+          <div class="options-list">
+            <div class="option" onclick="selectOption(this, 3)">
+              بديل للـ CSS في React
+            </div>
+            <div class="option" onclick="selectOption(this, 3)">
+              لغة برمجة مستقلة
+            </div>
+            <div
+              class="option"
+              data-correct="true"
+              onclick="selectOption(this, 3)"
+            >
+              امتداد لبناء الجملة في JavaScript يشبه HTML
+            </div>
+          </div>
+          <div class="feedback" id="feedback-3"></div>
+          <div style="margin-top: 20px">
+            <button
+              id="check-answer-3"
+              class="btn btn-block"
+              onclick="checkAnswer(3)"
+            >
+              تحقق من إجابتك
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="lesson-page-4" class="page">
+        <div class="lesson-header">
+          <div class="lesson-title">الحالة (State) والخصائص (Props)</div>
+          <div class="lesson-number">الدرس 4</div>
+        </div>
+
+        <div class="lesson-content">
+          <p class="lesson-description">
+            الحالة (State) والخصائص (Props) هما مفهومان أساسيان في React لإدارة
+            البيانات داخل التطبيق.
+            <br /><br />
+            <strong>Props</strong> هي القيم التي تُمرر من المكون الأب إلى المكون
+            الابن، وهي للقراءة فقط ولا يمكن تعديلها داخل المكون الذي يستقبلها.
+            <br /><br />
+            <strong>State</strong> هي البيانات التي يديرها المكون داخلياً ويمكن
+            تغييرها من خلال دوال محددة، مما يؤدي إلى إعادة عرض المكون عند تغيير
+            الحالة.
+          </p>
+        </div>
+
+        <div class="quiz-section">
+          <h3 class="quiz-title">اختبر معلوماتك</h3>
+          <p class="quiz-question">ما الفرق بين State و Props؟</p>
+          <div class="options-list">
+            <div class="option" onclick="selectOption(this, 4)">
+              لا يوجد فرق بينهما
+            </div>
+            <div
+              class="option"
+              data-correct="true"
+              onclick="selectOption(this, 4)"
+            >
+              Props تمرر من الخارج، State تدار داخلياً
+            </div>
+            <div class="option" onclick="selectOption(this, 4)">
+              Props و State كلاهما ثابت ولا يمكن تغييره
+            </div>
+          </div>
+          <div class="feedback" id="feedback-4"></div>
+          <div style="margin-top: 20px">
+            <button
+              id="check-answer-4"
+              class="btn btn-block"
+              onclick="checkAnswer(4)"
+            >
+              تحقق من إجابتك
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="lesson-page-5" class="page">
+        <div class="lesson-header">
+          <div class="lesson-title">دورة حياة المكون وال-Hooks</div>
+          <div class="lesson-number">الدرس 5</div>
+        </div>
+
+        <div class="lesson-content">
+          <p class="lesson-description">
+            تمر مكونات React بدورة حياة (Lifecycle) من التركيب والتحديث وإزالة
+            التركيب. في المكونات الصنفية، يمكن التفاعل مع دورة الحياة من خلال
+            طرق مثل componentDidMount و componentDidUpdate.
+            <br /><br />
+            مع إدخال Hooks في React 16.8، أصبح من الممكن استخدام ميزات مثل
+            الحالة ودورة الحياة في المكونات الوظيفية. أهم Hooks هي:
+            <br /><br />
+            <strong>useState</strong>: لإدارة الحالة المحلية<br />
+            <strong>useEffect</strong>: للتعامل مع الآثار الجانبية مثل جلب
+            البيانات ودورة الحياة<br />
+            <strong>useContext</strong>: للوصول إلى بيانات السياق
+          </p>
+        </div>
+
+        <div class="quiz-section">
+          <h3 class="quiz-title">اختبر معلوماتك</h3>
+          <p class="quiz-question">ما هي الـ Hooks في React؟</p>
+          <div class="options-list">
+            <div class="option" onclick="selectOption(this, 5)">
+              أدوات لتصميم واجهة المستخدم فقط
+            </div>
+            <div class="option" onclick="selectOption(this, 5)">
+              تقنية قديمة لم تعد تستخدم
+            </div>
+            <div
+              class="option"
+              data-correct="true"
+              onclick="selectOption(this, 5)"
+            >
+              وظائف تسمح باستخدام ميزات مثل الحالة في المكونات الوظيفية
+            </div>
+          </div>
+          <div class="feedback" id="feedback-5"></div>
+          <div style="margin-top: 20px">
+            <button
+              id="check-answer-5"
+              class="btn btn-block"
+              onclick="checkAnswer(5)"
+            >
+              تحقق من إجابتك
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- صفحة إكمال الدرس -->
+      <div id="completion-page" class="page">
+        <div class="lesson-header">
+          <div class="lesson-title">إكمال الدرس</div>
+        </div>
+
+        <div class="completion-card">
+          <div class="completion-icon">🎉</div>
+          <h2 class="completion-title">أحسنت!</h2>
+          <p class="completion-message">
+            لقد أكملت الدرس بنجاح. استمر في التعلم واستكشاف المزيد من المفاهيم
+            في React.
+          </p>
+          <div class="btn-group">
+            <button class="btn" onclick="backToHome()">العودة للقائمة</button>
+            <button class="btn btn-outline" onclick="backToHome()">
+              الدرس التالي
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- شريط الأدوات السفلي -->
+      <div class="bottom-nav">
+        <button class="nav-btn" onclick="backToHome()">
+          <div class="nav-icon">🏠</div>
+          <span>الرئيسية</span>
+        </button>
+        <button class="nav-btn" id="prev-btn" onclick="prevLesson()">
+          <div class="nav-icon">⬅️</div>
+          <span>السابق</span>
+        </button>
+        <button class="nav-btn" id="next-btn" onclick="nextLesson()">
+          <div class="nav-icon">➡️</div>
+          <span>التالي</span>
+        </button>
       </div>
     </div>
 
-    <script>
-      const lessons = {
-        1: {
-          title: "الدرس 1: مقدمة عن React",
-          content:
-            "React هي مكتبة جافاسكريبت لإنشاء واجهات مستخدم.<br>لإعداد البيئة:<br>1. ثبت <a href='https://nodejs.org'>Node.js</a>.<br>2. استخدم الأمر <span class='code'>npx create-react-app</span>.",
-        },
-        2: {
-          title: "الدرس 2: المكونات",
-          content:
-            "المكونات هي أساس React. مثال بسيط:<br><span class='code'>function App() { return <h1>مرحبًا</h1>; }</span>",
-        },
-        3: {
-          title: "الدرس 3: الـ State والـ Props",
-          content:
-            "الـ State بيستخدم لإدارة البيانات المتغيرة، والـ Props لتمرير البيانات للمكونات.",
-        },
-      };
-
-      function showLessons() {
-        document.getElementById("main-page").classList.add("hidden");
-        document.getElementById("lessons-page").classList.remove("hidden");
-        document.getElementById("lesson-page").classList.add("hidden");
-      }
-
-      function showMain() {
-        document.getElementById("main-page").classList.remove("hidden");
-        document.getElementById("lessons-page").classList.add("hidden");
-        document.getElementById("lesson-page").classList.add("hidden");
-      }
-
-      function showLesson(lessonId) {
-        const lesson = lessons[lessonId];
-        document.getElementById("lesson-title").innerText = lesson.title;
-        document.getElementById("lesson-content").innerHTML = lesson.content;
-        document.getElementById("main-page").classList.add("hidden");
-        document.getElementById("lessons-page").classList.add("hidden");
-        document.getElementById("lesson-page").classList.remove("hidden");
-      }
-    </script>
+    <script src="./main.js"></script>
   </body>
 </html>
