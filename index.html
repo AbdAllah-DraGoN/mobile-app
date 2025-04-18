@@ -1,5 +1,138 @@
-<html>
-<body>
-<h1> test</h1>
-</body>
+<!DOCTYPE html>
+<html lang="ar">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>تعلم React</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f5f5f5;
+        direction: rtl;
+        text-align: right;
+      }
+      .container {
+        padding: 20px;
+        max-width: 100%;
+      }
+      h1 {
+        color: #61dafb;
+        font-size: 24px;
+      }
+      p {
+        color: #333333;
+        font-size: 16px;
+      }
+      button {
+        background-color: #61dafb;
+        color: #ffffff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        margin: 10px 0;
+        cursor: pointer;
+        border-radius: 5px;
+      }
+      button:hover {
+        background-color: #4db8e3;
+      }
+      .lesson-card {
+        background-color: #ffffff;
+        padding: 15px;
+        margin: 10px 0;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      .code {
+        background-color: #f0f0f0;
+        padding: 5px;
+        font-family: monospace;
+        color: #61dafb;
+      }
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- الصفحة الرئيسية -->
+      <div id="main-page">
+        <h1>مرحبًا بك في تعلم React!</h1>
+        <p>
+          React هي مكتبة جافاسكريبت لبناء واجهات مستخدم تفاعلية.<br />في الكورس
+          ده، هنتعلم أساسيات React خطوة بخطوة.
+        </p>
+        <button onclick="showLessons()">ابدأ الدروس الآن</button>
+      </div>
+
+      <!-- قائمة الدروس -->
+      <div id="lessons-page" class="hidden">
+        <h1>دروس تعلم React</h1>
+        <div class="lesson-card" onclick="showLesson(1)">
+          <h3>الدرس 1: مقدمة عن React</h3>
+          <p>هنتعلم إزاي نجهز بيئة العمل لـ React.</p>
+        </div>
+        <div class="lesson-card" onclick="showLesson(2)">
+          <h3>الدرس 2: المكونات</h3>
+          <p>هنتعلم إزاي نعمل Components في React.</p>
+        </div>
+        <div class="lesson-card" onclick="showLesson(3)">
+          <h3>الدرس 3: الـ State والـ Props</h3>
+          <p>هنفهم الفرق بين State وProps.</p>
+        </div>
+        <button onclick="showMain()">رجوع</button>
+      </div>
+
+      <!-- صفحة الدرس -->
+      <div id="lesson-page" class="hidden">
+        <h1 id="lesson-title"></h1>
+        <p id="lesson-content"></p>
+        <button onclick="showLessons()">رجوع</button>
+      </div>
+    </div>
+
+    <script>
+      const lessons = {
+        1: {
+          title: "الدرس 1: مقدمة عن React",
+          content:
+            "React هي مكتبة جافاسكريبت لإنشاء واجهات مستخدم.<br>لإعداد البيئة:<br>1. ثبت <a href='https://nodejs.org'>Node.js</a>.<br>2. استخدم الأمر <span class='code'>npx create-react-app</span>.",
+        },
+        2: {
+          title: "الدرس 2: المكونات",
+          content:
+            "المكونات هي أساس React. مثال بسيط:<br><span class='code'>function App() { return <h1>مرحبًا</h1>; }</span>",
+        },
+        3: {
+          title: "الدرس 3: الـ State والـ Props",
+          content:
+            "الـ State بيستخدم لإدارة البيانات المتغيرة، والـ Props لتمرير البيانات للمكونات.",
+        },
+      };
+
+      function showLessons() {
+        document.getElementById("main-page").classList.add("hidden");
+        document.getElementById("lessons-page").classList.remove("hidden");
+        document.getElementById("lesson-page").classList.add("hidden");
+      }
+
+      function showMain() {
+        document.getElementById("main-page").classList.remove("hidden");
+        document.getElementById("lessons-page").classList.add("hidden");
+        document.getElementById("lesson-page").classList.add("hidden");
+      }
+
+      function showLesson(lessonId) {
+        const lesson = lessons[lessonId];
+        document.getElementById("lesson-title").innerText = lesson.title;
+        document.getElementById("lesson-content").innerHTML = lesson.content;
+        document.getElementById("main-page").classList.add("hidden");
+        document.getElementById("lessons-page").classList.add("hidden");
+        document.getElementById("lesson-page").classList.remove("hidden");
+      }
+    </script>
+  </body>
 </html>
