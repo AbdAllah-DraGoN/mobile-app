@@ -1,0 +1,437 @@
+:root {
+  --primary: #4361ee;
+  --primary-light: #4895ef;
+  --primary-dark: #3f37c9;
+  --secondary: #f72585;
+  --success: #4cc9f0;
+  --warning: #ffbe0b;
+  --danger: #f94144;
+  --dark: #1b263b;
+  --light: #f8f9fa;
+  --gray: #e0e1dd;
+  --text: #2b2d42;
+  --text-light: #8d99ae;
+  --border-radius: 12px;
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Cairo", sans-serif;
+}
+
+body {
+  background-color: #f8fafc;
+  color: var(--text);
+  height: 100vh;
+  overflow: hidden;
+}
+
+.container {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.page {
+  display: none;
+  height: calc(100% - 65px);
+  width: 100%;
+  flex-direction: column;
+  padding: 20px;
+  overflow: hidden;
+}
+
+.active {
+  display: flex;
+}
+
+/* الصفحة الرئيسية */
+.home-header {
+  text-align: center;
+  margin-bottom: 25px;
+  padding-top: 10px;
+}
+
+.app-logo {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 15px;
+  background-color: var(--primary);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow);
+  color: white;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.home-header h1 {
+  color: var(--primary);
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 5px;
+}
+
+.home-header p {
+  color: var(--text-light);
+  font-size: 16px;
+}
+
+/* قائمة الدروس */
+.lessons-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 15px;
+  overflow-y: auto;
+  padding-bottom: 10px;
+}
+
+.lesson-card {
+  background-color: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  transition: transform 0.2s;
+}
+
+.lesson-card:active {
+  transform: scale(0.98);
+}
+
+.lesson-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--primary-light);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.lesson-info {
+  flex: 1;
+}
+
+.lesson-info h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 5px;
+  color: var(--dark);
+}
+
+.lesson-info p {
+  font-size: 14px;
+  color: var(--text-light);
+  line-height: 1.3;
+}
+
+.lesson-arrow {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  flex-shrink: 0;
+  font-size: 20px;
+}
+
+/* الدرس */
+.lesson-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  justify-content: space-between;
+}
+
+.lesson-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.lesson-number {
+  background-color: var(--primary);
+  color: white;
+  border-radius: 20px;
+  padding: 5px 15px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow);
+  aspect-ratio: 16/9;
+  background-color: #eee;
+}
+
+.video-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.play-button::after {
+  content: "";
+  border-style: solid;
+  border-width: 12px 0 12px 20px;
+  border-color: transparent transparent transparent var(--primary);
+  margin-left: 4px;
+}
+
+.lesson-content {
+  background-color: white;
+  border-radius: var(--border-radius);
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow);
+}
+
+.lesson-description {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.quiz-section {
+  background-color: #f0f7ff;
+  border-radius: var(--border-radius);
+  padding: 20px;
+  margin-bottom: 15px;
+}
+
+.quiz-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: var(--primary-dark);
+}
+
+.quiz-question {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.option {
+  background-color: white;
+  border: 2px solid var(--gray);
+  border-radius: var(--border-radius);
+  padding: 15px;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  padding-right: 35px;
+}
+
+.option::before {
+  content: "";
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--gray);
+  border-radius: 50%;
+}
+
+.option.selected {
+  border-color: var(--primary);
+  background-color: rgba(67, 97, 238, 0.05);
+}
+
+.option.selected::before {
+  border-color: var(--primary);
+  background-color: var(--primary);
+}
+
+.option.correct {
+  border-color: var(--success);
+  background-color: rgba(76, 201, 240, 0.1);
+}
+
+.option.correct::before {
+  border-color: var(--success);
+  background-color: var(--success);
+}
+
+.option.incorrect {
+  border-color: var(--danger);
+  background-color: rgba(249, 65, 68, 0.1);
+}
+
+.feedback {
+  margin-top: 15px;
+  padding: 12px;
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  display: none;
+}
+
+.feedback.success {
+  background-color: rgba(76, 201, 240, 0.2);
+  color: var(--primary-dark);
+  display: block;
+}
+
+.feedback.error {
+  background-color: rgba(249, 65, 68, 0.2);
+  color: var(--danger);
+  display: block;
+}
+
+/* شريط الأدوات السفلي */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 65px;
+  background-color: white;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 100;
+}
+
+.nav-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  height: 100%;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: var(--text-light);
+  font-size: 12px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.nav-btn.active {
+  color: var(--primary);
+}
+
+.nav-icon {
+  font-size: 24px;
+  margin-bottom: 4px;
+}
+
+/* صفحة إكمال الدرس */
+.completion-card {
+  background-color: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  padding: 30px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.completion-icon {
+  font-size: 50px;
+  margin-bottom: 20px;
+}
+
+.completion-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 15px;
+}
+
+.completion-message {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 30px;
+  color: var(--text-light);
+}
+
+.btn {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  padding: 12px 25px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-block;
+  text-align: center;
+}
+
+.btn:hover,
+.btn:active {
+  background-color: var(--primary-dark);
+}
+
+.btn-outline {
+  background-color: transparent;
+  border: 2px solid var(--primary);
+  color: var(--primary);
+}
+
+.btn-outline:hover,
+.btn-outline:active {
+  background-color: var(--primary);
+  color: white;
+}
+
+.btn-block {
+  display: block;
+  width: 100%;
+}
+
+.btn-group {
+  display: flex;
+  gap: 15px;
+}
